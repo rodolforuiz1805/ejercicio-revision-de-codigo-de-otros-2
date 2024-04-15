@@ -1,46 +1,48 @@
-var formulario = document.querySelector("#form")
+/*  faltan ";" en todo el código  */
+
+var formulario = document.getElementById("form");
 
 formulario.onsubmit = function(e) {
 
-  e.prevent();
+  e.preventDefault();  /* la funcion era incorrecta */
   
-  var n = formulario.elements[0]
-  var e = formulario.elements[1]
-  var na = formulario.elements[2]
+  var n = formulario.elements[0];
+  var e = formulario.elements[1];
+  var na = formulario.elements[2];
 
-  var nombre = n.value
-  var edad = e.value
+  var nombre = n.value;
+  var edad = e.value;
 
-  var i = na.selectedIndex
-  var nacionalidad = na.options[i].value
-  console.log(nombre, edad)
-  console.log(nacionalidad)
+  var i = na.selectedIndex;
+  var nacionalidad = na.options[i].value;
+  console.log(nombre, edad);
+  console.log(nacionalidad);
 
   if (nombre.length === 0) {
-    n.classList.add("error")
+    n.classList.add("error");
   }
   if (edad < 18 || edad > 120) {
-    e.classList.add("error")
+    e.classList.add("error");
   }
 
 if (nombre.length > 0 
   && (edad > 18 
     && edad < 120) ) {
-  agregarInvitado(nombre, edad, nacionalidad)
+  agregarInvitado(nombre, edad, nacionalidad);
   }
 }
 
-var botonBorrar = document.createElement("button")
-botonBorrar.textContent = "Eliminar invitado"
-botonBorrar.id = "boton-borrar"
+var botonBorrar = document.createElement("button");
+botonBorrar.textContent = "Eliminar invitado";
+botonBorrar.id = "boton-borrar";
 var corteLinea = document.createElement("br")
-document.body.appendChild(corteLinea)
+document.body.appendChild(corteLinea);
 document.body.appendChild(botonBorrar);
 
 function agregarInvitado(nombre, edad, nacionalidad) {
 
   if (nacionalidad === "ar") {
-    nacionalidad = "Argentina"
+    nacionalidad = "Argentina";
   }
   else if (nacionalidad === "mx") {
     nacionalidad = "Mexicana"
@@ -55,8 +57,11 @@ function agregarInvitado(nombre, edad, nacionalidad) {
 var lista = document.getElementById("lista-de-invitados")
 
 var elementoLista = document.createElement("div")
-elementoLista.classList.added("elemento-lista")
+elementoLista.classList.add("elemento-lista"); /* esta mal escrito add */
 lista.appendChild(elementoLista)
+
+/*
+Este bloque est repetido en la función de abajo de "crear elemento"
 
 var spanNombre = document.createElement("span")
 var inputNombre = document.createElement("input")
@@ -66,17 +71,18 @@ inputNombre.value = nombre
 elementoLista.appendChild(spanNombre)
 elementoLista.appendChild(inputNombre)
 elementoLista.appendChild(espacio)
+*/
 
-function crearElemento(descripcion, valor) {
-var spanNombre = document.createElement("span")
-var inputNombre = document.createElement("input")
-var espacio = document.createElement("br")
-spanNombre.textContent = descripcion + ": "
-inputNombre.value = valor 
-elementoLista.appendChild(spanNombre)
-elementoLista.appendChild(inputNombre)
-elementoLista.appendChild(espacio)
-}
+  function crearElemento(descripcion, valor) {
+    var spanNombre = document.createElement("span")
+    var inputNombre = document.createElement("input")
+    var espacio = document.createElement("br")
+    spanNombre.textContent = descripcion + ": "
+    inputNombre.value = valor
+    elementoLista.appendChild(spanNombre)
+    elementoLista.appendChild(inputNombre)
+    elementoLista.appendChild(espacio)
+  }
 
 crearElemento("Nombre", nombre)
 crearElemento("Edad", edad)
@@ -90,8 +96,8 @@ var corteLinea = document.createElement("br")
 elementoLista.appendChild(corteLinea)
 elementoLista.appendChild(botonBorrar);
 
- botonBorrar.onclick = function() {
-// this.parentNode.style.display = 'none';
-botonBorrar.parentNode.remove()
+  botonBorrar.onclick = function () {
+    this.parentNode.style.display = 'none'; /* Quite el comentario para que aparezca en pantalla */
+    botonBorrar.parentNode.remove()
   }
 }
